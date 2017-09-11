@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>javascript schedule test</title>
+
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- jQuery and jQuery UI (CDN) -- http://jquery.com/ !-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+<!-- custom scripts !-->
+<script src="scripts/login.js" type="text/javascript"></script>
+<script src="scripts/search.js" type="text/javascript"></script>
+<script src="scripts/util.js" type="text/javascript"></script>
+
+<style>
+label {
+    display: inline-block;
+    width: 5em;
+}
+</style>
+
+<script>
+    $( function() { $( ".widget input[type=submit], .widget a, .widget button" ).button(); } );
+    $( function() { $( document ).tooltip(); } );
+</script>
+  
+</head>
+
+<body onLoad="load()">
+
+<div id="login_section">
+    <!-- https://www.html5rocks.com/en/tutorials/file/filesystem/#toc-file !-->
+    <button onClick="">Load</button>
+    <button class="center" onClick="">Save</button>
+    
+    <form id="login_form" style="display: inline; vertical-align: middle;" action="javascript:login()">
+        <input type="text" id="username" name="username" value="Username" onfocus="clearValue('Username', this);" onfocusout="resetValue('Username', this);">
+        <input type="text" id="password" name="password" value="Password" onfocus="clearValue('Password', this);" onfocusout="resetValue('Password', this);">
+        <input type="submit" value="Login">
+    </form>
+    
+    <button id="logout_btn" style="display: none;" onClick="logout()">Logout</button>
+    
+    <label id="current_user" style="display: inline; color: white; width: 300px;" />
+    
+    <label id="curr_acad_year" style="display: inline; vertical-align: middle; text-align: center; color: white; font-size: 200%; position: relative; float: right;">Fall 2017</label>
+
+    <label id="version" style="display: inline; vertical-align: middle; text-align: center; color:yellow; width: 400px; font-size: 150%; position: relative; float: right;">UAlbany Course Search (Alpha)</label>
+</div>
+
+<div id="search_section">
+    <form id="search_form" action="javascript:course_search_jquery();">
+        <table id="search" style="color: white;">
+            <th>Level</th>
+            <th>College or School</th>
+            <th>Department or Program</th>
+            <th>Subject</th>
+            <th>Course #</th>
+            <th>Class #</th>
+            <th>Grading</th>
+            <th>Session</th>
+            <tr>
+                <td>
+                    <select id="level" name="Level">
+                        <option value="">Both Graduate AND Undergraduate Courses</option>
+                        <option value="G">Graduate Only</option>
+                        <option value="U">Undergraduate Only</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="colleges" name="College_or_School" style="font-size: 11px;">
+                        <option value="">All Colleges and Schools</option>
+                        <option value="arts">College of Arts & Sciences</option>
+                        <option value="applied">College of Engineering &amp; Applied Sciences</option>
+                        <option value="nano">College of Nanoscale Science and Engineering</option>
+                        <option value="affairs">Rockefeller College of Public Affairs and Policy</option>
+                        <option value="business">School of Business</option>
+                        <option value="criminal">School of Criminal Justice</option>
+                        <option value="education">School of Education</option>
+                        <option value="welfare">School of Social Welfare</option>
+                        <option value="health">School of Public Health</option>
+                        <option value="emergency">College of Emergency Prep., Homeland Sec. &amp; Cybersec.</option>
+                        <option value="university">University wide</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="programs" name="Department_or_Program" onchange="test();" onkeydown="test();" >
+                        <option value="">All Departments/Programs</option>
+                        <option value="accounting">Accounting</option>
+                        <option value="library">Advanced Library Research</option>
+                        <option value="africana">Africana Studies</option>
+                        <option value="anthropology">Anthropology</option>
+                        <option value="arabic">Arabic</option>
+                        <option value="art">Art</option>
+                        <option value="art history">Art History</option>
+                        <option value="arts">Arts and Sciences</option>
+                        <option value="atmos">Atmospheric Science</option>
+                        <option value="biology">Biology</option>
+                        <option value="biomedical">Biomedical Sciences</option>
+                        <option value="biometry">Biometry and Statistics</option>
+                        <option value="business">Business, Business Law</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="classical">Classical Archaeology</option>
+                        <option value="classical">Classical History</option>
+                        <option value="latin">Classics-Latin</option>
+                        <option value="communication">Communication</option>
+                        <option value="computer engineering">Computer Engineering</option>
+                        <option value="computer">Computer Science</option>
+                        <option value="counseling psychology">Counseling Psychology</option>
+                        <option value="criminal">Criminal Justice</option>
+                        <option value="danish">Danish</option>
+                        <option value="documentary">Documentary Studies</option>
+                        <option value="dutch">Dutch</option>
+                        <option value="asian">East Asian Studies (see also Chinese, Japanese, Korean)</option>
+                        <option value="economics">Economics</option>
+                        <option value="education">Education</option>
+                        <option value="educational administration">Educational Administration</option>
+                        <option value="educational psychology">Educational Psychology</option>
+                        <option value="practice">Educational Theory and Practice</option>
+                        <option value="emergency">Emergency Preparedness, Homeland Sec. &amp; Cyber Sec.</option>
+                        <option value="eop">EOP Program</option>
+                        <option value="english">English</option>
+                        <option value="environmental health sciences">Environmental Health Sciences</option>
+                        <option value="environmental sciences">Environmental Sciences</option>
+                        <option value="epidemiology">Epidemiology</option>
+                        <option value="film">Film Studies</option>
+                        <option value="finance">Finance</option>
+                        <option value="french">French</option>
+                        <option value="geology">Geology</option>
+                        <option value="geography">Geography</option>
+                        <option value="german">German</option>
+                        <option value="globalization">Globalization Studies</option>
+                        <option value="health policy">Health Policy and Management</option>
+                        <option value="hebrew">Hebrew</option>
+                        <option value="history">History (including Art History and Classical History)</option>
+                        <option value="humanities">Humanities</option>
+                        <option value="informatics">Informatics</option>
+                        <option value="information studies">Information Studies</option>
+                        <option value="management">Information Technology Management</option>
+                        <option value="rinterdisciplinary">Interdisciplinary Studies</option>
+                        <option value="affairs">International Affairs</option>
+                        <option value="italian">Italian</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="journalism">Journalism</option>
+                        <option value="judaic">Judaic Studies</option>
+                        <option value="korean">Korean</option>
+                        <option value="cultures">Languages, Literatures, Cultures (also indiv. lang. prog.)</option>
+                        <option value="caribbean">Latin American & Caribbean Studies</option>
+                        <option value="liberal">Liberal Studies</option>
+                        <option value="linguistics">Linguistics</option>
+                        <option value="literacy teaching">Literacy Teaching and Learning</option>
+                        <option value="information systems">Management Information Systems (only)</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="medieval">Medieval and Renaissance Studies</option>
+                        <option value="music">Music</option>
+                        <option value="nano">Nanoscale Science and Engineering</option>
+                        <option value="organizational">Organizational Studies</option>
+                        <option value="philosophy">Philosophy</option>
+                        <option value="philosophy of education">Philosophy of Education</option>
+                        <option value="physics">Physics</option>
+                        <option value="planning">Planning</option>
+                        <option value="political">Political Science</option>
+                        <option value="portuguese">Portuguese</option>
+                        <option value="psychology">Psychology</option>
+                        <option value="public administration">Public Administration</option>
+                        <option value="affairs">Public Affairs</option>
+                        <option value="public health">Public Health</option>
+                        <option value="religious">Religious Studies</option>
+                        <option value="russian">Russian, Russian and East European Studies</option>
+                        <option value="school psychology">School Psychology</option>
+                        <option value="special education">Special Education</option>
+                        <option value="social">Social Welfare</option>
+                        <option value="sociology">Sociology</option>
+                        <option value="sociology of education">Sociology of Education</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="study abroad">Study Abroad</option>
+                        <option value="theatre">Theatre</option>
+                        <option value="women">Women's Gender and Sexuality Studies</option>
+                        <option value="yiddish">Yiddish</option>
+                        <option value="pharmacy">Albany College of Pharmacy</option>
+                        <option value="adirondack">Adirondack Community College</option>
+                        <option value="albany law">Albany Law School</option>
+                        <option value="albany medical">Albany Medical College</option>
+                        <option value="columbia-greene">Columbia-Greene Community College</option>
+                        <option value="cobleskill">SUNY Cobleskill</option>
+                        <option value="empire">Empire State College</option>
+                        <option value="fulton">Fulton Montgomery Community College</option>
+                        <option value="hudson">Hudson Valley Community College</option>
+                        <option value="hartwick">Hartwick College</option>
+                        <option value="junior">Junior College of Albany</option>
+                        <option value="maria">Maria College</option>
+                        <option value="massachusetts">Massachusetts College of Liberal Arts</option>
+                        <option value="rensselaer">Rensselaer Polytechnic Institute</option>
+                        <option value="russell">Russell Sage College</option>
+                        <option value="schenectady">Schenectady County Community College</option>
+                        <option value="siena">Siena College</option>
+                        <option value="skidmore">Skidmore College</option>
+                        <option value="rose">College of St. Rose</option>
+                        <option value="union">Union College</option>
+                    </select>
+                </td>
+                <td><input type="text" id="subject" size="4" maxlength="4" title="the four letter subject code"></td>
+                <td><input type="text" id="catalog_number" size="5" maxlength="5" title="ex. 101"></td>
+                <td><input type="text" id="class_number" size="5" maxlength="5" title="ex. 6453"></td>
+                <td>
+                    <select id="grading" name="Grading">
+                        <option value="">Both A-E and S/U</option>
+                        <option value="GRD">A-E only</option>
+                        <option value="SUS">S/U only</option>
+                        <option value="GLU">Load Credit or Unsatis.</option>
+                        <option value="GRU">Research Credit or Unsatis.</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="session" name="Session">
+                        <option value="">All courses</option>
+                        <option value="1">Semester</option>
+                        <option value="8W1">8 Week 1 only</option>
+                        <option value="8W2">8 Week 2 only</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        
+        <table id="search1" style="color: white;">
+            <tr>
+                <td>IT Commons</td>
+                <td>
+                    <select id="it_commons" name="IT_COMMONS">
+                        <option value="">Include IT Commons Courses</option>
+                        <option value="Y">Only IT Commons Courses</option>
+                        <option value="N">Only NON-IT Commons Courses</option>
+                    </select>
+                </td>
+                <td>Fully Online</td>
+                <td>
+                    <select id="online" name="FULLY_ONLINE">
+                        <option value="">Include Fully Online Courses</option>
+                        <option value="Y">Only Fully Online Courses</option>
+                        <option value="N">Only NON-Fully Online Courses</option>
+                    </select>
+                </td>
+                <td>General Education </td>
+                <td>
+                    <select id="gened" name="GENERAL_EDUCATION">
+                        <option value="">All types/not restricted to Gened</option>
+                        <option value="ARTS">Arts (DP-ARTS)</option>
+                        <option value="HUM">Humanities (DP-HUM)</option>
+                        <option value="NATSCI">Natural Sciences (DP-NATSCI)</option>
+                        <option value="SOCSCI">Social Sciences (DP-SOCSCI)</option>
+                        <option value="USHIS1">U.S. History (CH-USHIS1): Regents &lt; 85</option>
+                        <option value="USHIS2">U.S. History (CH-USHIS2): Regents 85 +</option>
+                        <option value="INTLPER">International Perspectives (INTLPER)</option>
+                        <option value="MATH">Mathematics and Statistics (MATH)</option>
+                        <option value="LANG">Foreign Language (LANG)</option>
+                        <option value="CHALLENGES">Challenges for the 21st Century (CHALLENGES)</option>
+                        <option value="WCI">Writing &amp; Critical Inquiry (WCI)</option>
+                    </select>
+                </td>
+                <td>Honors College</td>
+                <td>
+                    <select id="honors" name="HONORS_COLLEGE">
+                        <option value="">Include Honors College Courses</option>
+                        <option value="Y">Only Honors College Courses</option>
+                        <option value="N">Only NON-Honors College Courses</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Writing Intensive</td>
+                <td>
+                    <select id="writing" name="WRITING_INTENSIVE">  
+                        <option value="">Include Writing Intensive Courses</option>
+                        <option value="Y">Only Writing Intensive Courses</option>
+                        <option value="N">Only NON-Writing Intensive Courses</option>
+                    </select>
+                </td>
+                <td>Oral Discourse</td>
+                <td>
+                    <select id="oral" name="ORAL_DISCOURSE">
+                        <option value="">Include Oral Discourse Courses</option>
+                        <option value="Y">Only Oral Discourse Courses</option>
+                        <option value="N">Only NON-Oral Discourse Courses</option>
+                    </select>
+                </td>
+                <td>Information Literacy</td>
+                <td>
+                    <select id="infolit" name="INFORMATION_LITERACY">
+                        <option value="">Include Information Literacy Courses</option>
+                        <option value="Y">Only Information Literacy Courses</option>
+                        <option value="N">Only NON-Information Literacy Courses</option>
+                    </select>
+                </td>
+                <td>Special Restrictions</td>
+                <td>
+                    <select id="spec_restrict" name="SPECIAL_RESTRICTIONS">
+                        <option value="any students">Any student</option>
+                        <option value="Fall Freshman">Fall Freshman</option>
+                        <option value="Spring Transfer">Spring Transfer</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Semester</td>
+                <td>
+                    <select id="semester" name="USER">
+                        <option value="0007">Spring</option>
+                        <option value="0009">Fall</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        
+        <input type="submit" value="Search"/>
+        <input TYPE="Reset" Value="Reset"/>
+        
+        <label id="num_results" style="color: white; width: 300px;"></label>
+    </form>
+</div>
+
+<div id="results_section">
+</div>
+
+<div id="raw">
+</div>
+
+</body>
+
+</html>

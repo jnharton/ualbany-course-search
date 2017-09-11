@@ -1,0 +1,60 @@
+table {
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+div#login_section {
+    background-color: blue;
+    width: 100%;
+    padding: 3px 1px 3px 1px;
+    position: relative;
+    float: left;
+}
+
+div#search_section {
+    background-color: purple;
+    height: 160px;
+    width: 100%;
+    padding: 0px 1px 0px 1px;
+    position: relative;
+    float: left;
+}
+
+div#results_section {
+    padding: 0px 1px 0px 1px;
+    position: relative;
+    float: left;
+}
+
+table td, table th {
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+#seats_rem {
+    font-weight: bold !important;
+}
+
+table#search, table#search th, table#search tr, table#search td {
+    border: none !important;
+}
+
+table#search1 table#search1 th, table#search1 tr, table#search1 td {
+    border: none !important;
+    padding: 0px 3px 0px 3px;
+}
+
+table#search_results {
+    width: 100% !important;
+}
+
+table#mytable, table#mytable td {
+    border: none !important;
+    width: 100%;
+}
+
+td #seat_restrict td, th #seat_restrict  {
+    border:     1px solid black !important;
+    width:      50% !important;
+    text-align: left !important;
+}
